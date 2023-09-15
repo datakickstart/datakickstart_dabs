@@ -1,0 +1,15 @@
+# The main pipeline for datakickstart_dabs
+resources:
+  pipelines:
+    datakickstart_dabs_pipeline:
+      name: datakickstart_dabs_pipeline
+      target: datakickstart_dabs_${bundle.environment}
+      libraries:
+        - notebook:
+            path: ../src/dlt_pipeline.ipynb
+      clusters:
+        - label: "default"
+          num_workers: 2
+
+      configuration:
+        bundle.sourcePath: /Workspace/${workspace.file_path}/src
