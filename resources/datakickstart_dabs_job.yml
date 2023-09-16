@@ -17,6 +17,10 @@ resources:
           job_cluster_key: job_cluster
           notebook_task:
             notebook_path: ../src/notebook.ipynb
+          libraries:
+            - pypi: 
+                package: requests
+          
         
         - task_key: refresh_pipeline
           depends_on:
