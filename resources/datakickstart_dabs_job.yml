@@ -20,12 +20,13 @@ resources:
           libraries:
             - pypi: 
                 package: requests
+          
         
-        # - task_key: refresh_pipeline
-        #   depends_on:
-        #     - task_key: notebook_task
-        #   pipeline_task:
-        #     pipeline_id: ${resources.pipelines.datakickstart_dabs_pipeline.id}
+        - task_key: refresh_pipeline
+          depends_on:
+            - task_key: notebook_task
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.datakickstart_dabs_pipeline.id}
         
         - task_key: main_task
           depends_on:
