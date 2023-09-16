@@ -19,7 +19,7 @@ resources:
             notebook_path: ../src/notebook.ipynb
           libraries:
             - pypi: 
-                package": "requests"
+                package: requests
         
         - task_key: refresh_pipeline
           depends_on:
