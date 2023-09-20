@@ -2,7 +2,7 @@
 resources:
   pipelines:
     datakickstart_dabs_pipeline:
-      name: datakickstart_dabs_pipeline
+      name: datakickstart_dabs_pipeline_${bundle.target}
       target: datakickstart_dabs_${bundle.environment}
       libraries:
         - notebook:
@@ -12,4 +12,4 @@ resources:
           num_workers: 2
 
       configuration:
-        bundle.sourcePath: /Workspace/${workspace.file_path}/src
+        bundle.sourcePath: /Workspace/${workspace.root_path}/src

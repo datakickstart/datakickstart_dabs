@@ -21,9 +21,21 @@ targets:
   # Optionally, there could be a 'staging' target here.
   # (See Databricks docs on CI/CD at https://docs.databricks.com/dev-tools/bundles/index.html.)
   #
-  # staging:
-  #  workspace:
-  #    host: https://adb-7923129632668114.14.azuredatabricks.net
+  staging:
+    # For staging deployments, we only have a single copy, so we override the
+    # workspace.root_path default of
+    # /Users/${workspace.current_user.userName}/.bundle/${bundle.target}/${bundle.name}
+    # to a path that is not specific to the current user.
+    mode: production
+    workspace:
+      host: https://adb-7923129632668114.14.azuredatabricks.net
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+    run_as:
+      user_name: training@dustinvannoy.com
+    # resources:
+    #   jobs:
+    #     datakickstart_dabs_job:
+    #       name: datakickstart_dabs_job-${bundle.target}
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -34,10 +46,10 @@ targets:
     mode: production
     workspace:
       host: https://adb-7923129632668114.14.azuredatabricks.net
-      root_path: /Shared/.bundle/prod/${bundle.name}
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
       # This runs as training@dustinvannoy.com in production. Alternatively,
       # a service principal could be used here using service_principal_name
       # (see Databricks documentation).
       user_name: training@dustinvannoy.com
-    
+
