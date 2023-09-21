@@ -2,11 +2,11 @@
 resources:
   jobs:
     datakickstart_dabs_job:
-      name: datakickstart_dabs_job
+      name: datakickstart_dabs_job_${bundle.target}
 
       schedule:
-        quartz_cron_expression: '44 37 8 * * ?'
-        timezone_id: Europe/Amsterdam
+        quartz_cron_expression: '0 30 19 * * ?'
+        timezone_id: America/Los_Angeles
 
       email_notifications:
         on_failure:
@@ -20,13 +20,14 @@ resources:
           libraries:
             - pypi: 
                 package: requests
-          
+          max_retries: 0
         
         - task_key: refresh_pipeline
           depends_on:
             - task_key: notebook_task
           pipeline_task:
             pipeline_id: ${resources.pipelines.datakickstart_dabs_pipeline.id}
+          max_retries: 0
         
         - task_key: main_task
           depends_on:
@@ -37,6 +38,7 @@ resources:
             entry_point: main
           libraries:
             - whl: ../dist/*.whl
+          max_retries: 0
 
       job_clusters:
         - job_cluster_key: job_cluster
