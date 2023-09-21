@@ -1,4 +1,4 @@
-name: Deploy to DEV
+name: Deploy to STAGING
 
 concurrency: 1
 
@@ -10,7 +10,7 @@ on:
       - opened
       - synchronize
     branches:
-      - dev
+      - main
     paths:
       - "**/*.yml"
       - "**/*.py"
@@ -25,10 +25,10 @@ jobs:
 
       - uses: databricks/setup-cli@main
 
-      - run: databricks bundle deploy
+      - run: databricks bundle deploy -t staging
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: dev
+          DATABRICKS_BUNDLE_ENV: staging
 
   pipeline_update:
     name: "Run pipeline update"
@@ -54,7 +54,7 @@ jobs:
         name: Run pipeline update
         run: |
           set -o pipefail
-          databricks bundle run datakickstart_dabs_job --refresh-all 2>&1 | tee output.log
+          databricks bundle run datakickstart_dabs_job -t staging --refresh-all 2>&1 | tee output.log
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: dev
+          DATABRICKS_BUNDLE_ENV: staging
