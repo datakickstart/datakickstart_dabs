@@ -10,7 +10,7 @@ on:
       - opened
       - synchronize
     branches:
-      - dev
+      - main
     paths:
       - "**/*.yml"
       - "**/*.py"
