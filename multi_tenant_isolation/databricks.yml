@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=bundle_config_schema.json
+# This is a Databricks asset bundle definition.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+
+bundle:
+  name: multi_tenant_bundle
+
+# variables:
+#   workspace_host:
+#     description: The workspace url to use for deployment.
+#     default: https://adb-3047470986259934.14.azuredatabricks.net
+
+workspace:
+  host: https://adb-3047470986259934.14.azuredatabricks.net
+
+include:
+  - resources/*.yml
+
+targets:
+  # The 'dev' target, used for development purposes.
+  # Whenever a developer deploys using 'dev', they get their own copy.
+  dev:
+    mode: development
+    default: true
+
+  # The 'staging' target, used for test/staging deployment.
+  staging:
+    mode: production
+    workspace:
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+    # run_as:
+      # user_name: someuser@mydomain.com
+
+  # The 'prod' target, used for production deployment.
+  prod:
+    mode: production
+    workspace:
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+    # run_as:
+      ## This can run as a specific user or service principal in production.
+      ## To run as service principal use service_principal_name (see Databricks documentation).
+      # user_name: someuser@mydomain.com
+

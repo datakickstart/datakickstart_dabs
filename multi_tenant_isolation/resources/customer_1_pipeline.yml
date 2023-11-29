@@ -1,0 +1,20 @@
+resources:
+  pipelines:
+    customer_1_pipeline:
+      name: customer_1_pipeline_${bundle.target}
+      target: multi_tenant_bundle_${bundle.target}
+      libraries:
+        - notebook:
+            path: ../src/dlt_pipeline.ipynb
+      edition: CORE
+      channel: PREVIEW
+      catalog: main
+      photon: false
+      clusters:
+        - label: "default"
+          num_workers: 2      
+
+      configuration:
+        bundle.sourcePath: /Workspace/${workspace.file_path}/src
+        pipelines.clusterShutdown.delay: 3m
+        customerId: "1"

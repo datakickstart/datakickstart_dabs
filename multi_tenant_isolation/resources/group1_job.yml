@@ -1,0 +1,26 @@
+# Single job to run group of tasks in parallel
+resources:
+  jobs:
+    group1_job:
+      name: multi_tenant_group1_job_${bundle.target}
+
+      schedule:
+        quartz_cron_expression: '0 30 19 * * ?'
+        timezone_id: America/Los_Angeles
+
+      # email_notifications:
+      #   on_failure:
+      #     - someuser@mydomain.com
+
+      tasks:    
+        - task_key: customer_1
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.customer_1_pipeline.id}
+          max_retries: 0
+          max_concurrent_runs: 0
+        - task_key: customer_2
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.customer_2_pipeline.id}
+          max_retries: 0
+          max_concurrent_runs: 0
+
