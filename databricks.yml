@@ -27,10 +27,10 @@ targets:
     # to a path that is not specific to the current user.
     mode: production
     workspace:
-      host: https://adb-2541733722036151.11.azuredatabricks.net/
+      host: https://adb-1855084017998148.8.azuredatabricks.net/
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
-    # run_as:
-      # user_name: someuser@mydomain.com
+      run_as:
+        user_name: saurabh.shukla@databricks.com
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -42,6 +42,8 @@ targets:
     workspace:
       host: https://adb-2541733722036151.11.azuredatabricks.net/
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+      run_as:
+        user_name: saurabh.shukla@databricks.com
     # run_as:
       ## This can run as a specific user or service principal in production.
       ## To run as service principal use service_principal_name (see Databricks documentation).

@@ -8,6 +8,9 @@ resources:
         quartz_cron_expression: '0 30 19 * * ?'
         timezone_id: America/Los_Angeles
 
+      run_as:
+        user_name: saurabh.shukla@databricks.com
+
       email_notifications:
         on_failure:
           - saurabh.shukla@databricks.com
