@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=bundle_config_schema.json
+
+# This is a Databricks asset bundle definition for datakickstart_dabs.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: dabs_example_proj
+
+workspace:
+  host: https://adb-7923129632668114.14.azuredatabricks.net/
+
+include:
+  - resources/*.yml
+
+variables:
+  # libraries_path:
+  #   description: Path to dependencies (whl, jar, etc).
+  #   default: /libraries
+  cluster_spark_version:
+    default: "13.3.x-scala2.12"
+  cluster_node_type:
+    default: "Standard_D4ds_v5"
+
+targets:
+  # The 'dev' target, used for development purposes.
+  # Whenever a developer deploys using 'dev', they get their own copy.
+  dev:
+    mode: development
+    default: true
+  
+  staging:
+    mode: production
+    workspace:
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+    run_as:
+      user_name: fake@example.com
+    variables:
+      cluster_spark_version: "14.3.x-scala2.12"
+      cluster_node_type: "Standard_E8d_v4"
+
+  # The 'prod' target, used for production deployment.
+  prod:
+    mode: production
+    workspace:
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+    run_as:
+      user_name: fake@example.com
+    variables:
+      cluster_spark_version: "14.3.x-scala2.12"
+      cluster_node_type: "Standard_E8d_v4"

@@ -1,0 +1,4 @@
+pytest
+databricks-connect>14.3.*
+pyspark>=3.5.*
+wheel
