@@ -48,6 +48,9 @@ jobs:
   pipeline_update:
     name: "Run pipeline update"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./simple_project
 
     needs:
       - deploy
