@@ -65,7 +65,7 @@ def setup():
     pass
 
   # create source location
-  os.mkdir(SOURCE_PATH_LOCAL)
+  os.makedirs(SOURCE_PATH_LOCAL)
 
 def write_source_batch(part, text):
   with open(f"{SOURCE_PATH_LOCAL}/{part}.csv", 'w') as f:
