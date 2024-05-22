@@ -69,10 +69,10 @@ jobs:
       - uses: databricks/setup-cli@main
 
       - shell: bash
-        name: Run pipeline update
+        name: Run e2e test workflow
         run: |
           set -o pipefail
-          databricks bundle run datakickstart_dabs_job --refresh-all 2>&1 | tee output.log
+          databricks bundle run notebook_validation_job --refresh-all 2>&1 | tee output.log
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_BUNDLE_ENV: dev
