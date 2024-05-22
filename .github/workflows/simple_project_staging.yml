@@ -1,4 +1,4 @@
-name: Deploy to STAGING
+name: Deploy simple_project to STAGING
 
 concurrency: 1
 

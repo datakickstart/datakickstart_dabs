@@ -1,4 +1,4 @@
-name: Deploy to DEV
+name: Deploy simple_project to DEV
 
 concurrency: 1
 
