@@ -18,7 +18,7 @@ targets:
     mode: development
     default: true
     workspace:
-      host: https://adb-1111129632668114.14.azuredatabricks.net
+      host: https://adb-7923129632668114.14.azuredatabricks.net/
 
   staging:
     # For staging deployments, we only have a single copy, so we override the
@@ -27,10 +27,10 @@ targets:
     # to a path that is not specific to the current user.
     mode: production
     workspace:
-      host: https://adb-1111129632668114.14.azuredatabricks.net
+      host: https://adb-7923129632668114.14.azuredatabricks.net/
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
-    # run_as:
-      # user_name: someuser@mydomain.com
+    run_as:
+      user_name: ${workspace.current_user.userName}
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -40,10 +40,10 @@ targets:
     # to a path that is not specific to the current user.
     mode: production
     workspace:
-      host: https://adb-1111129632668114.14.azuredatabricks.net
+      host: https://adb-7923129632668114.14.azuredatabricks.net/
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
-    # run_as:
-      ## This can run as a specific user or service principal in production.
-      ## To run as service principal use service_principal_name (see Databricks documentation).
-      # user_name: someuser@mydomain.com
+    run_as:
+      # This can run as a specific user or service principal in production.
+      # To run as service principal use service_principal_name (see Databricks documentation).
+      user_name: someuser@mydomain.com
 

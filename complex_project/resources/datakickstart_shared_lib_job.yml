@@ -1,0 +1,49 @@
+# The main job for datakickstart_dabs
+resources:
+  jobs:
+    datakickstart_shared_lib_job:
+      name: datakickstart_shared_lib_job_${bundle.target}
+
+      # schedule:
+      #   quartz_cron_expression: '0 30 19 * * ?'
+      #   timezone_id: America/Los_Angeles
+
+      # email_notifications:
+      #   on_failure:
+      #     - fake@example.com
+
+      tasks:
+        - task_key: shared_lib_task
+          job_cluster_key: job_cluster
+          python_wheel_task:
+            package_name: datakickstart_dabs
+            entry_point: main
+          libraries:
+            - whl: /Shared/code/datakickstart_dabs-0.0.1-py3-none-any.whl 
+            # - whl: ../dist/*.whl
+          max_retries: 0
+        - task_key: notebook_task
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebook.ipynb
+          libraries:
+            - pypi: 
+                package: pytest
+          max_retries: 0
+        
+        # - task_key: refresh_pipeline
+        #   depends_on:
+        #     - task_key: notebook_task
+        #   pipeline_task:
+        #     pipeline_id: ${resources.pipelines.datakickstart_dabs_pipeline.id}
+        #   max_retries: 0
+
+      job_clusters:
+        - job_cluster_key: job_cluster
+          new_cluster:
+            spark_version: 13.3.x-scala2.12
+            node_type_id: ${var.cluster_node_type}
+            autoscale:
+                min_workers: 1
+                max_workers: 2
+
