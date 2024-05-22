@@ -18,7 +18,7 @@ variables:
   cluster_spark_version:
     default: "13.3.x-scala2.12"
   cluster_node_type:
-    default: "Standard_D4ds_v5"
+    default: "Standard_DS3_v2"
 
 targets:
   # The 'dev' target, used for development purposes.
