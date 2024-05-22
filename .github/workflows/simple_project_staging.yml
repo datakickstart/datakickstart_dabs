@@ -7,7 +7,7 @@ on:
 
   push:
     branches:
-      - monorepo
+      - main
     paths:
       - "**/*.yml"
       - "**/*.py"
