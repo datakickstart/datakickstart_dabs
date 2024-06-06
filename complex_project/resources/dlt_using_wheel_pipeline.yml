@@ -10,8 +10,6 @@ resources:
       clusters:
         - label: default
           num_workers: 2
-          # libraries:
-          #   - whl: /Shared/code/datakickstart_dabs-0.0.1.whl     
 
       configuration:
         bundle.sourcePath: /Workspace/${workspace.file_path}/src

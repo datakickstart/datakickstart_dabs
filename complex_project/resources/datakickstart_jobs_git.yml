@@ -1,0 +1,63 @@
+resources:
+  jobs:
+    datakickstart_job_from_git:
+      name: datakickstart_job_from_git_${bundle.target}
+      max_concurrent_runs: 4
+      tasks:
+        - task_key: notebook_task
+          notebook_task:
+            notebook_path: complex_project/src/notebook
+            source: GIT
+          job_cluster_key: job_cluster
+          libraries:
+            - pypi:
+                package: pytest
+      job_clusters:
+        - job_cluster_key: job_cluster
+          new_cluster:
+            cluster_name: ""
+            spark_version: 13.3.x-scala2.12
+            azure_attributes:
+              availability: ON_DEMAND_AZURE
+            node_type_id: Standard_DS3_v2
+            enable_elastic_disk: true
+            data_security_mode: SINGLE_USER
+            autoscale:
+              min_workers: 1
+              max_workers: 2
+      git_source:
+        git_url: https://github.com/datakickstart/datakickstart_dabs.git
+        git_provider: gitHub
+        git_branch: monorepo
+      tags:
+        dev: training
+      queue:
+        enabled: true
+
+    demo_serverless_job:
+      name: demo_file_trigger_job_${bundle.target}
+      trigger:
+        pause_status: UNPAUSED
+        file_arrival:
+          url: /Volumes/main/demo_ext/demo-vol1/
+          min_time_between_triggers_seconds: 300
+      tasks:
+        - task_key: Demo_Task1
+          notebook_task:
+            notebook_path: src/notebook
+            source: GIT
+        - task_key: Demo_Task3_SQL
+          depends_on:
+            - task_key: Demo_Task1
+          sql_task:
+            file:
+              path: complex_project/src/queries/taxi_counts.sql
+              source: GIT
+            warehouse_id: 14544c3680a3b80a
+      git_source:
+        git_url: https://github.com/datakickstart/datakickstart_dabs.git
+        git_provider: gitHub
+        git_branch: main
+      queue:
+        enabled: true
+
