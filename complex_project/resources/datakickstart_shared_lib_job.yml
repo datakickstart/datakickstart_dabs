@@ -19,7 +19,7 @@ resources:
             package_name: datakickstart_dabs
             entry_point: main
           libraries:
-            - whl: /Shared/code/datakickstart_dabs-0.0.1-py3-none-any.whl 
+            - whl: /Workspace/Shared/code/datakickstart_dabs-0.0.1-py3-none-any.whl 
             # - whl: ../dist/*.whl
           max_retries: 0
         - task_key: notebook_task
