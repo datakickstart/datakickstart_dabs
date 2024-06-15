@@ -23,7 +23,7 @@ resources:
       tasks:
         - task_key: serverless_notebook_task1
           notebook_task:
-            notebook_path: ../src/dbconnect_examples_standalone
+            notebook_path: ../src/dbconnect_examples_standalone.ipynb
             source: WORKSPACE
       queue:
         enabled: true
