@@ -1,7 +1,7 @@
 resources:
   jobs:
-    datakickstart_serverless_shared_lib:
-      name: "datakickstart_serverless_shared_lib_${bundle.target}"
+     datakickstart_serverless_shared_lib:
+      name: "datakickstart_shared_lib_serverless_${bundle.target}"
       tasks:
         - task_key: shared_lib_task
           python_wheel_task:
@@ -27,4 +27,3 @@ resources:
             source: WORKSPACE
       queue:
         enabled: true
-
