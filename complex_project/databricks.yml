@@ -32,7 +32,7 @@ targets:
     workspace:
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
-      user_name: fake@example.com
+      user_name: ${workspace.current_user.userName}
     variables:
       cluster_spark_version: "14.3.x-scala2.12"
       cluster_node_type: "Standard_E8d_v4"

@@ -19,7 +19,7 @@ resources:
             package_name: datakickstart_dabs
             entry_point: main
           libraries:
-            - whl: /Shared/code/datakickstart_dabs-0.0.1-py3-none-any.whl 
+            - whl: /Workspace/Shared/code/datakickstart_dabs-0.0.1-py3-none-any.whl 
             # - whl: ../dist/*.whl
           max_retries: 0
         - task_key: notebook_task
@@ -30,13 +30,13 @@ resources:
             - pypi: 
                 package: pytest
           max_retries: 0
-        
-        # - task_key: refresh_pipeline
-        #   depends_on:
-        #     - task_key: notebook_task
-        #   pipeline_task:
-        #     pipeline_id: ${resources.pipelines.datakickstart_dabs_pipeline.id}
-        #   max_retries: 0
+
+        - task_key: refresh_pipeline
+          depends_on:
+            - task_key: notebook_task
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.datakickstart_dabs_pipeline.id}
+          max_retries: 0
 
       job_clusters:
         - job_cluster_key: job_cluster
@@ -46,4 +46,3 @@ resources:
             autoscale:
                 min_workers: 1
                 max_workers: 2
-

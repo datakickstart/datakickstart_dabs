@@ -10,7 +10,7 @@ resources:
 
       email_notifications:
         on_failure:
-          - training@dustinvannoy.com
+          - fake@example.com
 
       tasks:
         - task_key: notebook_task
