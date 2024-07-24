@@ -8,3 +8,5 @@ __pycache__/
 .venv/
 scratch/**
 !scratch/README.md
+
+.databricks
