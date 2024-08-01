@@ -1,7 +1,7 @@
 # The main job for flights_project
 resources:
   jobs:
-    flights_notebook:
+    flights_notebook_classic:
       name: flights_notebook_job_${bundle.target}
 
       tasks:

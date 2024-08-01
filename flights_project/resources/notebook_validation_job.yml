@@ -1,0 +1,27 @@
+resources:
+  jobs:
+    notebook_validation_job:
+      name: flights_notebook_validation_job_${bundle.target}
+
+      tasks:
+        - task_key: setup_task
+          notebook_task:
+            notebook_path: ../tests/integration/setup_notebook.ipynb
+          max_retries: 0
+        
+        - task_key: notebook_job
+          depends_on:
+            - task_key: setup_task
+          run_job_task:
+            job_id: ${resources.jobs.flights_notebook.id}
+            job_parameters:
+              catalog: main
+              database: flights_test
+          max_retries: 0
+          
+        - task_key: validation_task
+          depends_on:
+            - task_key: notebook_job
+          notebook_task:
+            notebook_path: ../tests/integration/validation_notebook.ipynb
+          max_retries: 0
