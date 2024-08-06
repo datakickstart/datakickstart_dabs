@@ -32,9 +32,10 @@ jobs:
 
       - name: Run unit tests
         env:
-          DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN}}
-          DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST}}
-          DATABRICKS_CLUSTER_ID: ${{secrets.DATABRICKS_CLUSTER_ID}}   
+          SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}
+          #DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN}}
+          #DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST}}
+          #DATABRICKS_CLUSTER_ID: ${{secrets.DATABRICKS_CLUSTER_ID}}   
         run: |
           pytest tests/
       
